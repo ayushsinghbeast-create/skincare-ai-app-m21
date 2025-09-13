@@ -25,7 +25,6 @@ def skincare_analyzer():
     st.title("Skincare Pro Analyzer")
     st.write("Enter Your Health & Lifestyle Details")
 
-    # Image Upload
     img = st.file_uploader("Upload a Selfie (Optional)", type=["jpg","png","jpeg"])
 
     sleep = st.slider("Sleep Hours", 0, 12, 7)
@@ -127,8 +126,29 @@ def gamification():
 def hyper_advice():
     st.title("Hyper-Personalized Skincare Advice")
     st.write("""
-    The future of skincare involves hyper-personalized plans analyzing diet, sleep,
-    and stress using AI & deep learning for customized recommendations.
+    The future of skincare likely involves hyper-personalized plans analyzing diet, sleep, and stress using advanced technology to identify root causes and tailor treatments for optimal skin health.
+
+    This approach moves beyond basic advice, employing AI and deep learning to understand individual biological and lifestyle factors, leading to customized product recommendations and routines that integrate overall wellness with dermatological care.
+
+    ### Understanding the "Why"
+    - **Holistic Approach**: Your skin is a reflection of your internal health, so factors like diet, sleep, and stress significantly impact its condition.
+    - **Beyond Surface-Level**: Addressing the root cause of skin issues (e.g., a breakout from stress or poor sleep) is more effective than just treating the symptom.
+    - **Technology-Driven**: AI, deep learning, and wearable tech can collect and analyze data to create truly personalized insights, which were previously unavailable.
+
+    ### Key Components of a Hyper-Personalized System
+    - **Diet Analysis**: AI-driven analysis of your dietary habits to identify triggers or deficiencies that affect skin health.
+    - **Sleep Tracking**: Monitoring sleep patterns to understand its quality and duration, recognizing its crucial role in skin repair and rejuvenation.
+    - **Stress Assessment**: Tracking stress levels through biometric data or user input to understand their impact on inflammation, hormonal balance, and skin barrier function.
+    - **Integrated AI & Deep Learning**: Algorithms process the collected data to provide actionable insights and recommend specific skincare products, dietary adjustments, stress management techniques, and even tailored routines.
+
+    ### How it Will Work in Practice
+    - **Data Collection**: Users might wear biosensors, connect with their smart devices, or provide input through sophisticated surveys about their lifestyle and diet.
+    - **AI Analysis**: AI models will process this data to correlate lifestyle habits (diet, sleep, stress) with specific skin concerns and overall skin health.
+    - **Personalized Plan**: The system will generate a customized skincare plan that may include:
+        - Dietary recommendations: to address nutritional deficiencies or sensitivities.
+        - Sleep hygiene tips: to improve rest and recovery.
+        - Stress management techniques: such as mindfulness or yoga to calm the body and mind.
+        - Customized product suggestions: tailored to your skin's immediate needs.
     """)
 
 # ----------------- 25 Skincare Tips -----------------
@@ -165,20 +185,52 @@ def skincare_25_tips():
 # ----------------- Daily Routine AI Checker -----------------
 def daily_routine_checker():
     st.title("Daily Routine AI Checker")
-    st.write("Follow your routine → Earn Points if completed!")
+    st.write("Follow these routines for healthy skin:")
 
-    routine = {
-        "Morning Cleanse": st.checkbox("Morning Cleanse"),
-        "Moisturize": st.checkbox("Moisturize"),
-        "Sunscreen": st.checkbox("Sunscreen"),
-        "Night Serum": st.checkbox("Night Serum"),
-        "Sleep 8 hrs": st.checkbox("Sleep 8 hrs")
-    }
+    st.subheader("Morning Routine")
+    morning_steps = [
+        "Morning Cleanse: Gently wash your face to remove impurities that have accumulated overnight.",
+        "Tone: Apply an alcohol-free toner to rebalance and rehydrate your skin.",
+        "Serum: Apply a targeted serum, such as a Vitamin C serum, to brighten skin and repair sun damage.",
+        "Moisturize: Apply a moisturizer to keep your skin soft.",
+        "Sunscreen: Apply broad-spectrum SPF 30 or higher to protect against sun damage."
+    ]
 
-    if st.button("Check Routine"):
-        score = sum([5 if v else -5 for v in routine.values()])
-        st.write("Routine Score:", score)
-        st.session_state.points += max(score, 0)
+    st.subheader("Night Routine")
+    night_steps = [
+        "Remove Makeup: Thoroughly remove all makeup and impurities with a gentle remover.",
+        "Cleanse & Tone: Use a gentle cleanser and alcohol-free toner to balance your skin.",
+        "Serum: Apply a serum like hyaluronic acid or retinoid for deep treatment.",
+        "Eye Cream: Gently apply a lightweight eye cream to address dark circles or puffiness.",
+        "Night Cream/Mask: Finish with a nourishing night cream or sleeping mask to lock in moisture."
+    ]
+
+    st.subheader("Foods to Include for Healthy Skin")
+    food_steps = [
+        "Berries, Citrus Fruits, Oranges - Vitamin C & antioxidants",
+        "Avocados, Sweet Potatoes - Healthy fats & vitamins",
+        "Leafy Greens - Spinach, Kale for vitamins A, C, E",
+        "Tomatoes, Carrots - Antioxidants for skin health",
+        "Fatty Fish, Nuts, Seeds - Omega-3s for hydration",
+        "Avocado & Olive Oil - Healthy fats for skin elasticity",
+        "Whole Grains, Legumes - Nutrients & less inflammation",
+        "Water & Green Tea - Hydration & antioxidants"
+    ]
+
+    all_steps = morning_steps + night_steps + food_steps
+
+    st.write("Mark Yes if followed, No if not followed:")
+    routine_score = 0
+    for step in all_steps:
+        ans = st.radio(step, ["Yes", "No"], key=step)
+        if ans == "Yes":
+            routine_score += 5
+        else:
+            routine_score -= 5
+
+    if st.button("Check Routine Score"):
+        st.write("Your Routine Score:", routine_score)
+        st.session_state.points += max(routine_score, 0)
         st.success(f"Points Updated! Total: {st.session_state.points}")
 
 # ----------------- Sidebar Navigation -----------------
