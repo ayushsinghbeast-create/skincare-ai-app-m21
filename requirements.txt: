@@ -1,3 +1,10 @@
 streamlit
 matplotlib
 numpy
+pandas
+scikit-learn
+tensorflow
+torch
+opencv-python
+pillow
+requests
